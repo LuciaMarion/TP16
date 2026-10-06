@@ -3,18 +3,18 @@
 
 Integración de **Trivy** en la fábrica de software (CI/CD) aplicando la arquitectura de **3 Fases con Paso de Artefactos** y la resolución de falsos positivos mediante el patrón **Render First (TP10B)**.
 
-### Comandos de Auditoría Local
-# 1. Auditoría SCA
+## Comandos de Auditoría Local
+### 1. Auditoría SCA
 trivy fs ./backend
 
-# 2. Auditoría de Imagen
+###2. Auditoría de Imagen
 trivy image devops-portfolio:latest
 
-# 3. Renderizado previo e IaC Scanning (TP10B)
+### 3. Renderizado previo e IaC Scanning (TP10B)
 helm template mi-app ./devops-portfolio -f devops-portfolio/values-prod.yaml > manifests-rendered-prod.yaml
 trivy config manifests-rendered-prod.yaml
 
-### Matriz de Control e Integración (Formato CSV)
+## Matriz de Control e Integración (Formato CSV)
 ```csv
 Fase / Job;Dominio Evaluado;Severidades;Exit Code;Acción ante Hallazgos;Evidencia
 Fase 1: build-and-package;Compilación Docker;-;0;Exporta app-image.tar como artefacto;Artefacto en GitHub Actions

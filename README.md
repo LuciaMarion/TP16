@@ -7,7 +7,7 @@ Integración de **Trivy** en la fábrica de software (CI/CD) aplicando la arquit
 ### 1. Auditoría SCA
 trivy fs ./backend
 
-###2. Auditoría de Imagen
+### 2. Auditoría de Imagen
 trivy image devops-portfolio:latest
 
 ### 3. Renderizado previo e IaC Scanning (TP10B)

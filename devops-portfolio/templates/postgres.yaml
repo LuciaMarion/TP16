@@ -31,8 +31,20 @@ spec:
         app: postgres
         {{- include "devops-portfolio.labels" . | nindent 8 }}
     spec:
+    ##
+    securityContext:
+        runAsNonRoot: true
+        runAsUser: 70
+        runAsGroup: 70
       containers:
         - name: postgres
+        ##
+        securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
           image: "{{ .Values.postgres.image.repository }}:{{ .Values.postgres.image.tag }}"
           imagePullPolicy: {{ .Values.postgres.image.pullPolicy }}
           ports:

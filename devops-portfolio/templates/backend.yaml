@@ -31,24 +31,12 @@ spec:
       initContainers:
         - name: wait-for-db
           image: busybox:1.36
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
           command:
             - sh
             - -c
             - until nc -z postgres-service 5432; do echo "Esperando DB..."; sleep 2; done
       containers:
         - name: backend
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            capabilities:
-              drop:
-                - ALL
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           ports:
